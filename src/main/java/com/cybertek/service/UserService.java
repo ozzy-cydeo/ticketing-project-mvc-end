@@ -53,7 +53,24 @@ public class UserService implements UserServiceImpl {
 		User user= userByUserName(username);
 		return DataGenerator.getUserDTOByUser(user);
 	}
+	
+	@Override
+	public List<UserDTO> updateUsers(UserDTO user) {
 
+		List<UserDTO> list = listOfUserDTO().stream().filter(x -> x.getUsername().equals(user.getUsername()) == false)
+				.collect(Collectors.toList());
+		
+		list.add(user);
+
+		return list;
+	}
+
+	@Override
+	public List<UserDTO> deleteUser(String username) {
+
+		return listOfUserDTO().stream().filter(x -> x.getUsername().equals(username) == false)
+				.collect(Collectors.toList());
+	}
 
 	@Override
 	public List<User> listOfUsersByRole(String Role) {
@@ -67,11 +84,7 @@ public class UserService implements UserServiceImpl {
 		return null;
 	}
 
-	@Override
-	public boolean deleteUser(String userName) {
-		// TODO Auto-generated method stub
-		return true;
-	}
+
 
 	@Override
 	public User insertUser(User user) {

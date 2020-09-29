@@ -28,15 +28,18 @@
                       			<h2 class="panel-title">User Create</h2>
                     		</header>
                     		<div class="panel-body">
-                      			<form id="needs-validation" novalidate action="#"
-                      			th:action="@{/user/create}" th:object ="${user}" method="post">  
+                    		
+                      			<form id="needs-validation" novalidate action="#" 
+                      			th:action="@{/user/create}" 
+                      			th:object ="${user}" 
+                      			method="post">  
                       			
                         			<div class="row">  
                             			<div class="col-sm-6 col-md-6 col-xs-12">  
                                 			<div class="form-group">  
                                    				 <label for="firstname">First Name</label>  
-                                    				<input type="text" id="firstname" 
-                                    				th:field="*{firstname}" placeholder="First Name" class="form-control" aria-describedby="inputGroupPrepend" required />  
+                                    				<input type="text" id="firstname" th:field="*{firstname}" 
+                                    				placeholder="First Name" class="form-control" aria-describedby="inputGroupPrepend" required />  
                                    					<div class="invalid-feedback">Please enter first name.</div>  
                                 			</div>  
                             			</div>
@@ -108,18 +111,17 @@
 										</div>
 
 										
-										<div class="col-sm-6 col-md-6 col-xs-12">
-											<div class="form-group">
-												<label for="role">Choose a Role:</label>
-													<select name="roleid" id="roleid" th:field="*{role}" class="custom-select" required="required">
-  														<option th:each="role : ${roles}" th:value="${role.description}" th:text="${role.description}"></option>
-  													</select>
-													<div class="invalid-feedback">Please choose role</div>
-											</div>
-										</div>
-										
-										
-										
+												<div class="col-sm-6 col-md-6 col-xs-12">
+													<div class="form-group">
+														<label for="lastname">Role</label>
+														<select id="role"  th:field="*{role}" class="custom-select" required >
+														<option th:value="''" th:text="Select"></option>
+														<option th:each="r : ${roles}" th:value="${r.id}" th:text="${r.description}"></option>
+														</select>
+														<div class="invalid-feedback">Please choose role</div>
+													</div>
+												</div>
+											
 									</div>
                         			
                         			<div class="row">  
@@ -161,16 +163,23 @@
                             </tr>
                           </thead>
                           <tbody>
+                          
                             <tr th:each="user : ${users}">
 								<td th:text="${user.firstname + ' '+ user.lastname}"></td>
 								<td th:text="${user.username}"></td>
 								<td th:text="${user.gender}"></td>
 								<td th:text="${user.phone}"></td>
-								<td th:text="${user.role}"></td>
+								<td th:text="${user.role.description}"></td>
+								
 								<td><a class="btn btn-warning rounded-0" 
-									th:href="@{/user/update/{id}(id=${user.username})}">Update</a>
-									<a class="btn btn-danger rounded-0"
-									th:href="@{/user/delete/{id}(id=${user.username})}">Delete</a></td>
+										th:href="@{/user/update/{id}(id=${user.username})}">Update
+									</a>
+									
+									<a class="btn btn-danger rounded-0" 
+										th:href="@{/user/delete/{id}(id=${user.username})}">Delete
+									</a>
+								</td>
+								
 							</tr>
                             
                           </tbody>
