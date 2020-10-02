@@ -2,7 +2,7 @@ package com.cybertek.util;
 
 public enum Gender {
 
-	Male("Male"), Female("Female");
+	MALE("Male"), FEMALE("Female");
 
 	private final String value;
 

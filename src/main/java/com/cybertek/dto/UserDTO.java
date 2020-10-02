@@ -2,48 +2,66 @@ package com.cybertek.dto;
 
 import com.cybertek.util.Gender;
 
+import lombok.*;
+
 public class UserDTO {
 
-	private String firstname;
-	private String lastname;
-	private String username;
-	private String password;
+	private String firstName;
+	private String lastName;
+	private String userName;
+	private String passWord;
 	private boolean enabled;
 	private String phone;
 	private RoleDTO role;
 	private Gender gender;
-
-
-	public String getFirstname() {
-		return firstname;
+	
+	public UserDTO() {
+		super();
 	}
 
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+	public UserDTO(String firstName, String lastName, String userName, String passWord, boolean enabled, String phone,
+			RoleDTO role, Gender gender) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.userName = userName;
+		this.passWord = passWord;
+		this.enabled = enabled;
+		this.phone = phone;
+		this.role = role;
+		this.gender = gender;
 	}
 
-	public String getLastname() {
-		return lastname;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassWord() {
+		return passWord;
+	}
+
+	public void setPassWord(String passWord) {
+		this.passWord = passWord;
 	}
 
 	public boolean isEnabled() {
@@ -78,28 +96,18 @@ public class UserDTO {
 		this.gender = gender;
 	}
 
-	public UserDTO(String firstname, String lastname, String username, String password, boolean enabled, String phone,
-			RoleDTO role, Gender gender) {
-		
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.username = username;
-		this.password = password;
-		this.enabled = enabled;
-		this.phone = phone;
-		this.role = role;
-		this.gender = gender;
-	}
-
-	public UserDTO() {
-
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		result = prime * result + (enabled ? 1231 : 1237);
+		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
+		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + ((passWord == null) ? 0 : passWord.hashCode());
+		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
+		result = prime * result + ((role == null) ? 0 : role.hashCode());
+		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
 		return result;
 	}
 
@@ -112,13 +120,49 @@ public class UserDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		UserDTO other = (UserDTO) obj;
-		if (username == null) {
-			if (other.username != null)
+		if (enabled != other.enabled)
+			return false;
+		if (firstName == null) {
+			if (other.firstName != null)
 				return false;
-		} else if (!username.equals(other.username))
+		} else if (!firstName.equals(other.firstName))
+			return false;
+		if (gender != other.gender)
+			return false;
+		if (lastName == null) {
+			if (other.lastName != null)
+				return false;
+		} else if (!lastName.equals(other.lastName))
+			return false;
+		if (passWord == null) {
+			if (other.passWord != null)
+				return false;
+		} else if (!passWord.equals(other.passWord))
+			return false;
+		if (phone == null) {
+			if (other.phone != null)
+				return false;
+		} else if (!phone.equals(other.phone))
+			return false;
+		if (role == null) {
+			if (other.role != null)
+				return false;
+		} else if (!role.equals(other.role))
+			return false;
+		if (userName == null) {
+			if (other.userName != null)
+				return false;
+		} else if (!userName.equals(other.userName))
 			return false;
 		return true;
 	}
+	
+	
+
+	
+	
+
+
 
 	
 	

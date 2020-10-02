@@ -38,7 +38,7 @@
                             			<div class="col-sm-6 col-md-6 col-xs-12">  
                                 			<div class="form-group">  
                                    				 <label for="firstname">First Name</label>  
-                                    				<input type="text" id="firstname" th:field="*{firstname}" 
+                                    				<input type="text" id="firstname" th:field="*{firstName}" 
                                     				placeholder="First Name" class="form-control" aria-describedby="inputGroupPrepend" required />  
                                    					<div class="invalid-feedback">Please enter first name.</div>  
                                 			</div>  
@@ -48,7 +48,7 @@
                                 			<div class="form-group">  
                                     			<label for="lastname">Last Name</label>  
                                     				<input type="text" id="lastname"
-                                    				th:field="*{lastname}" placeholder="Last Name" class="form-control" aria-describedby="inputGroupPrepend" required />  
+                                    				th:field="*{lastName}" placeholder="Last Name" class="form-control" aria-describedby="inputGroupPrepend" required />  
                                     				<div class="invalid-feedback">Please enter last name.</div>  
                                 			</div>  
                             			</div>  
@@ -60,7 +60,7 @@
                             			<div class="col-sm-6 col-md-6 col-xs-12">  
                                 			<div class="form-group">  
                                     			<label for="email">Email address</label>  
-														<input type="email" class="form-control"  th:field="*{username}" placeholder="email address" aria-describedby="inputGroupPrepend" required>
+														<input type="email" class="form-control"  th:field="*{userName}" placeholder="email address" aria-describedby="inputGroupPrepend" required>
   
                                     				<div class="invalid-feedback">Please provide a valid email.</div>  
                                 			</div>  
@@ -81,7 +81,7 @@
                               				<div class="form-group">  
                                 				<label for="inputPassword1">Password</label>
                                 					<input type="password" class="form-control" name="inputPassword1" id="pass1"
-                                					th:field="*{password}" placeholder="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"required>
+                                					th:field="*{passWord}" placeholder="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"required>
                             						<div class="invalid-feedback">Passwords should be a minimum of 8 characters and include at least one upper case letter, one lower case letter and one number.</div>
                               				</div>  
                           				</div>  
@@ -165,18 +165,18 @@
                           <tbody>
                           
                             <tr th:each="user : ${users}">
-								<td th:text="${user.firstname + ' '+ user.lastname}"></td>
-								<td th:text="${user.username}"></td>
+								<td th:text="${user.firstName + ' '+ user.lastName}"></td>
+								<td th:text="${user.userName}"></td>
 								<td th:text="${user.gender}"></td>
 								<td th:text="${user.phone}"></td>
 								<td th:text="${user.role.description}"></td>
 								
 								<td><a class="btn btn-warning rounded-0" 
-										th:href="@{/user/update/{id}(id=${user.username})}">Update
+										th:href="@{/user/update/{id}(id=${user.userName})}">Update
 									</a>
 									
 									<a class="btn btn-danger rounded-0" 
-										th:href="@{/user/delete/{id}(id=${user.username})}">Delete
+										th:href="@{/user/delete/{id}(id=${user.userName})}">Delete
 									</a>
 								</td>
 								

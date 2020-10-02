@@ -33,16 +33,16 @@ public class DataGenerator {
 
 	//Create Users
 	public static User user1 = new User(1, LocalDateTime.now(), 1, LocalDateTime.now().plusHours(1), 1, "John", "Kesy",
-			"admin@cybertek.com", "abc", true, "7459684532", adminRole, Gender.Male);
+			"admin@cybertek.com", "abc", true, "7459684532", adminRole, Gender.MALE);
 
 	public static User user2 = new User(2, LocalDateTime.now(), 1, LocalDateTime.now().plusHours(1), 1, "Delisa",
-			"Norre", "T001@cybertek.com", "123", true, "8567412358", managerRole, Gender.Female);
+			"Norre", "T001@cybertek.com", "123", true, "8567412358", managerRole, Gender.FEMALE);
 
 	public static User user3 = new User(3, LocalDateTime.now(), 1, LocalDateTime.now().plusHours(1), 1, "Craig", "Jark",
-			"P001@cybertek.com", "123", true, "7777775566", employeeRole, Gender.Male);
+			"P001@cybertek.com", "123", true, "7777775566", employeeRole, Gender.MALE);
 
 	public static User user4 = new User(4, LocalDateTime.now(), 1, LocalDateTime.now().plusHours(1), 1, "Shaun",
-			"Hayns", "S001@cybertek.com", "123", true, "3256987412", employeeRole, Gender.Male);
+			"Hayns", "S001@cybertek.com", "123", true, "3256987412", employeeRole, Gender.MALE);
 	
 	
 	//Retrieve the Users as a List
@@ -62,17 +62,17 @@ public class DataGenerator {
 
 		RoleDTO role = roleService.getRoleDTOById(user.getRole().getId());
 
-		return new UserDTO(user.getFirstname(), user.getLastname(), user.getUsername(), user.getPassword(),
+		return new UserDTO(user.getFirstName(), user.getLastName(), user.getFirstName(), user.getPassWord(),
 				user.isEnabled(), user.getPhone(), role, user.getGender());
 
 	}
 
 	//Create Managers
 	public static User manager1 = new User(2, LocalDateTime.now(), 1, LocalDateTime.now().plusHours(1), 1, "Delisa",
-			"Norre", "T001@cybertek.com", "123", true, "8567412358", managerRole, Gender.Female);
+			"Norre", "T001@cybertek.com", "123", true, "8567412358", managerRole, Gender.FEMALE);
 
 	public static User manager2 = new User(3, LocalDateTime.now(), 1, LocalDateTime.now().plusHours(1), 1, "Craig",
-			"Jark", "P001@cybertek.com", "123", true, "7777775566", managerRole, Gender.Male);
+			"Jark", "P001@cybertek.com", "123", true, "7777775566", managerRole, Gender.MALE);
 	
 	
 /*

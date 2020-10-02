@@ -38,6 +38,7 @@ public class UserController {
 	public String createUser(Model model) {
 		
 		UserDTO user = new UserDTO();
+		
 		List<UserDTO> users = userService.listOfUserDTO();
 		List<RoleDTO> roles = roleService.getRoleDTOs();
 		

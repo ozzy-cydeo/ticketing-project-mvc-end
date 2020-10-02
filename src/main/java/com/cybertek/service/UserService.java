@@ -25,7 +25,7 @@ public class UserService implements UserServiceImpl {
 
 	@Override
 	public User userByUserName(String userName) {
-		return DataGenerator.getUsers().stream().filter(x -> x.getUsername().equals(userName)).findFirst().get();
+		return DataGenerator.getUsers().stream().filter(x -> x.getUserName().equals(userName)).findFirst().get();
 	}
 
 	@Override
@@ -37,13 +37,13 @@ public class UserService implements UserServiceImpl {
 	@Override
 	public String userByUserId(Long id) {
 		User user = DataGenerator.getUsers().stream().filter(x -> x.getId() == id).findFirst().get();
-		return user.getFirstname() + " " + user.getLastname();
+		return user.getFirstName() + " " + user.getLastName();
 	}
 
 	@Override
 	public List<UserDTO> listOfUserDTO() {
 		return listOfUsers().stream().map(x -> {
-			return new UserDTO(x.getFirstname(), x.getLastname(), x.getUsername(), x.getPassword(), x.isEnabled(),
+			return new UserDTO(x.getFirstName(), x.getLastName(), x.getUserName(), x.getPassWord(), x.isEnabled(),
 					x.getPhone(), roleService.getRoleDTOById(x.getRole().getId()), x.getGender());
 		}).collect(Collectors.toList());
 	}
@@ -57,7 +57,7 @@ public class UserService implements UserServiceImpl {
 	@Override
 	public List<UserDTO> updateUsers(UserDTO user) {
 
-		List<UserDTO> list = listOfUserDTO().stream().filter(x -> x.getUsername().equals(user.getUsername()) == false)
+		List<UserDTO> list = listOfUserDTO().stream().filter(x -> x.getUserName().equals(user.getUserName()) == false)
 				.collect(Collectors.toList());
 		
 		list.add(user);
@@ -68,7 +68,7 @@ public class UserService implements UserServiceImpl {
 	@Override
 	public List<UserDTO> deleteUser(String username) {
 
-		return listOfUserDTO().stream().filter(x -> x.getUsername().equals(username) == false)
+		return listOfUserDTO().stream().filter(x -> x.getUserName().equals(username) == false)
 				.collect(Collectors.toList());
 	}
 
