@@ -14,11 +14,7 @@ public class UserDTO {
 	private String phone;
 	private RoleDTO role;
 	private Gender gender;
-	
-	//No-Arg Constructor
-	//Arg Constructor
-	//Getter
-	//Setter
+
 	
 	public UserDTO() {
 		super();
