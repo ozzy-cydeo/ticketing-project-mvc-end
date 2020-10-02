@@ -15,6 +15,11 @@ public class UserDTO {
 	private RoleDTO role;
 	private Gender gender;
 	
+	//No-Arg Constructor
+	//Arg Constructor
+	//Getter
+	//Setter
+	
 	public UserDTO() {
 		super();
 	}
