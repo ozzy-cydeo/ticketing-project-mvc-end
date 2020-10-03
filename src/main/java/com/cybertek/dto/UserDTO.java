@@ -2,8 +2,19 @@ package com.cybertek.dto;
 
 import com.cybertek.util.Gender;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import com.cybertek.dto.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
 public class UserDTO {
 
 	private String firstName;
@@ -14,12 +25,13 @@ public class UserDTO {
 	private String phone;
 	private RoleDTO role;
 	private Gender gender;
-
 	
+	/*
 	public UserDTO() {
 		super();
 	}
 
+	
 	public UserDTO(String firstName, String lastName, String userName, String passWord, boolean enabled, String phone,
 			RoleDTO role, Gender gender) {
 		super();
@@ -32,6 +44,7 @@ public class UserDTO {
 		this.role = role;
 		this.gender = gender;
 	}
+
 
 	public String getFirstName() {
 		return firstName;
@@ -96,6 +109,7 @@ public class UserDTO {
 	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
+	
 
 	@Override
 	public int hashCode() {
@@ -157,6 +171,7 @@ public class UserDTO {
 			return false;
 		return true;
 	}
+	*/
 	
 	
 

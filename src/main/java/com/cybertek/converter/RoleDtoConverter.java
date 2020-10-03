@@ -1,4 +1,4 @@
-package com.cybertek.controller.converter;
+package com.cybertek.converter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
@@ -6,23 +6,23 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 import com.cybertek.dto.RoleDTO;
-import com.cybertek.dto.UserDTO;
-import com.cybertek.implementation.UserServiceImpl;
 import com.cybertek.implementation.RoleServiceImpl;
 
 @Component
 @ConfigurationPropertiesBinding
-public class UserDtoConverter implements Converter<Object, UserDTO> {
+public class RoleDtoConverter implements Converter<Object, RoleDTO> {
 
 	@Autowired
-	UserServiceImpl service;
+	RoleServiceImpl service;
+	
 
-	public UserDTO convert(Object source) {
-		String username = (String) source;
-		UserDTO object = new UserDTO();
+	public RoleDTO convert(Object source) {
+		Integer id = Integer.parseInt((String)source);
+		RoleDTO object=new RoleDTO();
 		try {
-			object = service.getUserDTOByUsername(username);
-
+			object = service.getRoleDTOById(id);
+			
+			System.out.println("Role Id :"+id);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

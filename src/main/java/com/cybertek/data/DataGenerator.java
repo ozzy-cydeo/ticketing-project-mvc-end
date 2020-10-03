@@ -6,13 +6,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.cybertek.dto.ProjectDTO;
 import com.cybertek.dto.RoleDTO;
 import com.cybertek.dto.UserDTO;
+import com.cybertek.entity.Project;
 import com.cybertek.entity.Role;
 import com.cybertek.entity.User;
 import com.cybertek.implementation.RoleServiceImpl;
 import com.cybertek.service.RoleService;
 import com.cybertek.util.Gender;
+import com.cybertek.util.Status;
 
 
 public class DataGenerator {
@@ -33,16 +37,16 @@ public class DataGenerator {
 
 	//Create Users
 	public static User user1 = new User(1, LocalDateTime.now(), 1, LocalDateTime.now().plusHours(1), 1, "John", "Kesy",
-			"admin@cybertek.com", "abc", true, "7459684532", adminRole, Gender.MALE);
+			"admin@cybertek.com", "abc", true, "7459684532", adminRole, Gender.Male);
 
 	public static User user2 = new User(2, LocalDateTime.now(), 1, LocalDateTime.now().plusHours(1), 1, "Delisa",
-			"Norre", "T001@cybertek.com", "123", true, "8567412358", managerRole, Gender.FEMALE);
+			"Norre", "T001@cybertek.com", "123", true, "8567412358", managerRole, Gender.Female);
 
 	public static User user3 = new User(3, LocalDateTime.now(), 1, LocalDateTime.now().plusHours(1), 1, "Craig", "Jark",
-			"P001@cybertek.com", "123", true, "7777775566", employeeRole, Gender.MALE);
+			"P001@cybertek.com", "123", true, "7777775566", employeeRole, Gender.Male);
 
 	public static User user4 = new User(4, LocalDateTime.now(), 1, LocalDateTime.now().plusHours(1), 1, "Shaun",
-			"Hayns", "S001@cybertek.com", "123", true, "3256987412", employeeRole, Gender.MALE);
+			"Hayns", "S001@cybertek.com", "123", true, "3256987412", employeeRole, Gender.Male);
 	
 	
 	//Retrieve the Users as a List
@@ -69,13 +73,31 @@ public class DataGenerator {
 
 	//Create Managers
 	public static User manager1 = new User(2, LocalDateTime.now(), 1, LocalDateTime.now().plusHours(1), 1, "Delisa",
-			"Norre", "T001@cybertek.com", "123", true, "8567412358", managerRole, Gender.FEMALE);
+			"Norre", "T001@cybertek.com", "123", true, "8567412358", managerRole, Gender.Female);
 
 	public static User manager2 = new User(3, LocalDateTime.now(), 1, LocalDateTime.now().plusHours(1), 1, "Craig",
-			"Jark", "P001@cybertek.com", "123", true, "7777775566", managerRole, Gender.MALE);
+			"Jark", "P001@cybertek.com", "123", true, "7777775566", managerRole, Gender.Male);
 	
 	
-/*
+	//Create Projects
+	public static Project project1 = new Project(1, LocalDateTime.now(), 1, LocalDateTime.now().plusHours(1), 1,
+			"PRJ001", "Human Resource CRM", manager1, LocalDate.now(), LocalDate.now().plusDays(6), Status.IN_PROGRESS,
+			"HCRM Detail Information");
+
+	public static Project project2 = new Project(2, LocalDateTime.now(), 1, LocalDateTime.now().plusHours(1), 1,
+			"PRJ002", "Infra Upgrade", manager2, LocalDate.now(), LocalDate.now().plusDays(3), Status.UAT_TEST,
+			"Server Details");
+
+
+	//Retrieve the Projects as a List
+	public static List<Project> getProjects() {
+		List<Project> projects = new ArrayList<>();
+		projects.add(project1);
+		projects.add(project2);
+		return projects;
+	}
+	
+	
 	//Retrieve the managers as a List
 	public static List<User> getManagers() {
 		List<User> managers = new ArrayList<>();
@@ -86,9 +108,7 @@ public class DataGenerator {
 	
 	
 	//setting up active user and managers
-	
 	public static UserDTO activeUser = getUserDTOByUser(user1);
-	
 	public static UserDTO activeManager =getUserDTOByUser(manager1);
 	
 
@@ -103,37 +123,13 @@ public class DataGenerator {
 	}
 
 	
-	
-	
-	
-	//Project Data
-
-	public static Project project1 = new Project(1, LocalDateTime.now(), 1, LocalDateTime.now().plusHours(1), 1,
-			"PRJ001", "Human Resource CRM", manager1, LocalDate.now(), LocalDate.now().plusDays(6), Status.IN_PROGRESS,
-			"HCRM Detail Information");
-
-	public static Project project2 = new Project(2, LocalDateTime.now(), 1, LocalDateTime.now().plusHours(1), 1,
-			"PRJ002", "Infra Upgrade", manager2, LocalDate.now(), LocalDate.now().plusDays(3), Status.UAT_TEST,
-			"Server Details");
-
-
-	public static List<Project> getProjects() {
-
-		List<Project> projects = new ArrayList<>();
-
-		projects.add(project1);
-		projects.add(project2);
-
-		return projects;
-
-	}
 
 	public static List<ProjectDTO> converterProjectDTO(List<Project> projects) {
 
 		List<ProjectDTO> list = projects.stream().map(x -> {
 
-			return new ProjectDTO(x.getCode(), x.getName(), getUserDTOByUser(x.getManager()), x.getStartDate(),
-					x.getEndDate(), x.getStatus(), x.getDetail());
+			return new ProjectDTO(x.getProjectCode(), x.getProjectName(), getUserDTOByUser(x.getAssignedManager()), x.getStartDate(),
+					x.getEndDate(), x.getProjectStatus(), x.getProjectDetail());
 
 		}).collect(Collectors.toList());
 
@@ -142,13 +138,13 @@ public class DataGenerator {
 
 	public static ProjectDTO getProjectDTOByProject(Project project) {
 
-		return new ProjectDTO(project.getCode(), project.getName(), getUserDTOByUser(project.getManager()),
-				project.getStartDate(), project.getEndDate(), project.getStatus(), project.getDetail());
+		return new ProjectDTO(project.getProjectCode(), project.getProjectName(), getUserDTOByUser(project.getAssignedManager()),
+				project.getStartDate(), project.getEndDate(), project.getProjectStatus(), project.getProjectDetail());
 	}
 
 
 	
-	
+	/*
 	
 	//Task Data
 	public static List<Task> getTasks() {
@@ -208,6 +204,6 @@ public class DataGenerator {
 
 		return Arrays.asList(Status.values());
 	}
-*/
+	*/
 
 }

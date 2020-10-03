@@ -94,8 +94,12 @@ public class UserService implements UserServiceImpl {
 
 	@Override
 	public List<UserDTO> getManagers() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return DataGenerator.getManagers().stream().map(x -> {
+			return new UserDTO(x.getFirstName(), x.getLastName(), x.getUserName(), x.getPassWord(), x.isEnabled(),
+					x.getPhone(), roleService.getRoleDTOById(x.getRole().getId()), x.getGender());
+
+		}).collect(Collectors.toList());
 	}
 
 }
