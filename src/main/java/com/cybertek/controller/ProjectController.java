@@ -61,6 +61,8 @@ public class ProjectController {
 
 		List<ProjectDTO> projects = projectService.getListOfProjectDTO();
 		ProjectDTO project = projectService.getProjectDTOByProjectCode(projectCode);
+		
+	
 
 		model.addAttribute("project", project);
 		model.addAttribute("managers", userService.getManagers());
@@ -81,7 +83,31 @@ public class ProjectController {
 		return "project/update";
 	}
 	
+	@GetMapping("/delete/{projectCode}")
+	public String delete(@PathVariable("projectCode") String projectCode, Model model) {
+
+		List<ProjectDTO> projects = projectService.deleteProjectDTO(projectCode);
+
+		model.addAttribute("project", new ProjectDTO());
+
+		model.addAttribute("managers", userService.getManagers());
+		model.addAttribute("projects", projects);
+
+		return "project/create";
+	}
 	
+	@GetMapping("/complete/{projectCode}")
+	public String complete(@PathVariable("projectCode") String projectCode, Model model) {
+
+		List<ProjectDTO> projects = projectService.completeProject(projectCode);
+
+		model.addAttribute("project", new ProjectDTO());
+
+		model.addAttribute("managers", userService.getManagers());
+		model.addAttribute("projects", projects);
+
+		return "project/create";
+	}
 	
 	
 	

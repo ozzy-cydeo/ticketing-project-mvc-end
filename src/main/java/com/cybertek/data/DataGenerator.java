@@ -9,9 +9,11 @@ import java.util.stream.Collectors;
 
 import com.cybertek.dto.ProjectDTO;
 import com.cybertek.dto.RoleDTO;
+import com.cybertek.dto.TaskDTO;
 import com.cybertek.dto.UserDTO;
 import com.cybertek.entity.Project;
 import com.cybertek.entity.Role;
+import com.cybertek.entity.Task;
 import com.cybertek.entity.User;
 import com.cybertek.implementation.RoleServiceImpl;
 import com.cybertek.service.RoleService;
@@ -144,7 +146,7 @@ public class DataGenerator {
 
 
 	
-	/*
+	
 	
 	//Task Data
 	public static List<Task> getTasks() {
@@ -181,9 +183,9 @@ public class DataGenerator {
 
 		List<TaskDTO> list = tasks.stream().map(x -> {
 
-			return new TaskDTO(x.getId(), x.getTitle(), x.getContent(), getUserDTOByUser(x.getUser()),
-					getProjectDTOByProject(x.getProject()), getUserDTOByUser(x.getManager()), x.getStartDateTime(),
-					x.getEndDateTime(), x.getStatus());
+			return new TaskDTO(x.getId(), x.getTaskSubject(), x.getTaskDetail(), getUserDTOByUser(x.getAssignedEmployee()),
+					getProjectDTOByProject(x.getAssignedProject()), getUserDTOByUser(x.getAssignedManager()), x.getStartDateTime(),
+					x.getEndDateTime(), x.getTaskStatus());
 
 		}).collect(Collectors.toList());
 
@@ -192,9 +194,9 @@ public class DataGenerator {
 
 	public static TaskDTO getTaskDTOByTask(Task x) {
 
-		return new TaskDTO(x.getId(), x.getTitle(), x.getContent(), getUserDTOByUser(x.getUser()),
-				getProjectDTOByProject(x.getProject()), getUserDTOByUser(x.getManager()), x.getStartDateTime(),
-				x.getEndDateTime(), x.getStatus());
+		return new TaskDTO(x.getId(), x.getTaskSubject(), x.getTaskDetail(), getUserDTOByUser(x.getAssignedEmployee()),
+				getProjectDTOByProject(x.getAssignedProject()), getUserDTOByUser(x.getAssignedManager()), x.getStartDateTime(),
+				x.getEndDateTime(), x.getTaskStatus());
 	}
 
 	
@@ -204,6 +206,6 @@ public class DataGenerator {
 
 		return Arrays.asList(Status.values());
 	}
-	*/
+	
 
 }
