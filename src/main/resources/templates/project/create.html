@@ -32,13 +32,17 @@
                     				<div class="panel-body">
                     		
 									<!-- --------------------------------------------------------------- -->
-									<form id="needs-validation" novalidate action=# th:action="@{/project/create}" th:object="${project}" method="post">  
+									<form id="needs-validation" novalidate action=# 
+									th:action="@{/project/create}" 
+									th:object="${project}" 
+									method="post">  
                           
                      					<div class="row">  
                             				<div class="col-sm-12 col-md-12 col-xs-12">  
                               					<div class="form-group">  
                                 					<label for="projectName">Project Name</label>  
-                                						<input type="text" th:field="*{projectName}" id="projectName" class="form-control" aria-describedby="inputGroupPrepend" required />  
+                                						<input type="text" th:field="*{projectName}" 
+                                						id="projectName" class="form-control" aria-describedby="inputGroupPrepend" required />  
                                 						<div class="invalid-feedback">Please enter project name</div>  
                               					</div>  
                             				</div>
@@ -146,9 +150,12 @@
 												<td th:text="${project.assignedManager.firstName +' '+ project.assignedManager.lastName}"></td>
 												<td th:text="${project.projectStatus.value}"></td>
 												<td>
-													<a class="btn btn-warning rounded-0" th:href="@{/project/update/{id}(id=${project.projectCode})}">Update</a> 
-													<a class="btn btn-danger rounded-0" th:href="@{/project/delete/{id}(id=${project.projectCode})}">Delete</a> 
-													<a class="btn btn-info rounded-0" th:href="@{/project/complete/{id}(id=${project.projectCode})}">Complete</a> 
+													<a class="btn btn-warning rounded-0" 
+													th:href="@{/project/update/{id}(id=${project.projectCode})}">Update</a> 
+													<a class="btn btn-danger rounded-0" 
+													th:href="@{/project/delete/{id}(id=${project.projectCode})}">Delete</a> 
+													<a class="btn btn-info rounded-0" 
+													th:href="@{/project/complete/{id}(id=${project.projectCode})}">Complete</a> 
 												</td>
 											</tr>
                             			</tbody>
