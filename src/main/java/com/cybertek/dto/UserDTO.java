@@ -10,11 +10,6 @@ import lombok.Setter;
 
 import com.cybertek.dto.*;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode
 public class UserDTO {
 
 	private String firstName;
@@ -26,7 +21,7 @@ public class UserDTO {
 	private RoleDTO role;
 	private Gender gender;
 	
-	/*
+	
 	public UserDTO() {
 		super();
 	}
@@ -171,7 +166,7 @@ public class UserDTO {
 			return false;
 		return true;
 	}
-	*/
+	
 	
 	
 

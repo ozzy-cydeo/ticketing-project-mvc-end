@@ -129,7 +129,7 @@
 											<tr th:each="task : ${tasks}">
 												<td th:text="${task.taskSubject}" />
 												<td th:text="${task.assignedProject.projectCode +'-'+task.assignedProject.projectName}" />
-												<td th:text="${task.getAssignedEmployee().getFirstName() +' '+ getAssignedEmployee().getLastName()}" />
+												<td th:text="${task.assignedEmployee.firstName +' '+ task.assignedEmployee.lastName}" />
 												<td th:text="${#temporals.format(task.startDateTime, 'MM/dd/yyyy HH:mm')}" />
 												<td th:text="${task.taskStatus.value}" />
 												<td>
