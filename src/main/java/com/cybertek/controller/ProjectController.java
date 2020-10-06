@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.cybertek.data.DataGenerator;
 import com.cybertek.dto.ProjectDTO;
+import com.cybertek.dto.UserDTO;
 import com.cybertek.implementation.ProjectServiceImpl;
 import com.cybertek.implementation.UserServiceImpl;
 import com.cybertek.util.Status;
@@ -85,7 +87,7 @@ public class ProjectController {
 	}
 	
 	@GetMapping("/delete/{projectCode}")
-	public String delete(@PathVariable("projectCode") String projectCode, Model model) {
+	public String deleteProject(@PathVariable("projectCode") String projectCode, Model model) {
 
 		List<ProjectDTO> projects = projectService.deleteProjectDTO(projectCode);
 
@@ -98,7 +100,7 @@ public class ProjectController {
 	}
 	
 	@GetMapping("/complete/{projectCode}")
-	public String complete(@PathVariable("projectCode") String projectCode, Model model) {
+	public String adminCompleteProject(@PathVariable("projectCode") String projectCode, Model model) {
 
 		List<ProjectDTO> projects = projectService.completeProject(projectCode);
 
@@ -109,6 +111,34 @@ public class ProjectController {
 
 		return "project/create";
 	}
+	
+	//PROJECT STATUS
+	
+	@GetMapping("/manager/complete")
+	public String getStatusOfProject(Model model) {
+
+		UserDTO manager = DataGenerator.activeManager;
+
+		List<ProjectDTO> projects = projectService.getCountedListOfProjectDTO(manager);
+		
+		model.addAttribute("projects", projects);
+
+		return "manager/project-status";
+	}
+	
+	@GetMapping("/manager/complete/{projectcode}")
+	public String managerCompleteProject(@PathVariable("projectcode") String projectcode, Model model) {
+
+		UserDTO manager = DataGenerator.activeManager;
+
+		List<ProjectDTO> projects = projectService.completeProjectByManager(manager, projectcode);
+
+		model.addAttribute("projects", projects);
+
+		return "manager/project-status";
+	}
+	
+	
 	
 	
 	

@@ -10,23 +10,21 @@ import com.cybertek.data.DataGenerator;
 import com.cybertek.dto.ProjectDTO;
 import com.cybertek.dto.UserDTO;
 import com.cybertek.entity.Project;
+import com.cybertek.entity.Task;
 import com.cybertek.entity.User;
 import com.cybertek.implementation.ProjectServiceImpl;
+import com.cybertek.implementation.TaskServiceImpl;
 import com.cybertek.implementation.UserServiceImpl;
 import com.cybertek.util.Status;
 
 @Service
 public class ProjectService implements ProjectServiceImpl {
 	
-	
+	@Autowired
 	UserServiceImpl userService;
 	
-	
 	@Autowired
-	public ProjectService(UserServiceImpl userService) {
-		super();
-		this.userService = userService;
-	}
+	TaskServiceImpl taskService;
 
 	@Override
 	public List<Project> getListOfProject() {
@@ -134,7 +132,33 @@ public class ProjectService implements ProjectServiceImpl {
 		return projects;
 	}
 
-	/*
+
+	
+	
+	
+	@Override
+	public List<ProjectDTO> getCountedListOfProjectDTO(UserDTO manager) {
+
+		List<ProjectDTO> list = getListOfProject().stream()
+				.filter(x -> x.getManager().getUserName().equals(manager.getUserName())).map(x -> {
+
+					List<Task> taskList = taskService.getListOfTask(x);
+
+					int completedCount = (int) taskList.stream().filter(t -> t.getTaskStatus() == Status.COMPLETED).count();
+
+					return new ProjectDTO(x.getProjectCode(), x.getProjectName(),
+							userService.getUserDTOByUsername(x.getManager().getUserName()), completedCount,
+							(taskList.size() - completedCount), x.getStartDate(), x.getEndDate(), x.getProjectStatus(),
+							x.getProjectDetail());
+
+				}).collect(Collectors.toList());
+
+		return list;
+
+	}
+	
+	
+	
 	@Override
 	public List<ProjectDTO> completeProjectByManager(UserDTO manager, String projectcode) {
 
@@ -150,29 +174,6 @@ public class ProjectService implements ProjectServiceImpl {
 
 		return list;
 	}
-	
-	
-	@Override
-	public List<ProjectDTO> getCountedListOfProjectDTO(UserDTO manager) {
-
-		List<ProjectDTO> list = getListOfProject().stream()
-				.filter(x -> x.getAssignedManager().getUserName().equals(manager.getUserName())).map(x -> {
-
-					List<Task> taskList = taskService.getListOfTask(x);
-
-					int completedCount = (int) taskList.stream().filter(t -> t.getStatus() == Status.COMPLETED).count();
-
-					return new ProjectDTO(x.getProjectCode(), x.getProjectName(),
-							userService.getUserDTOByUsername(x.getAssignedManager().getUserName()), completedCount,
-							(taskList.size() - completedCount), x.getStartDate(), x.getEndDate(), x.getProjectStatus(),
-							x.getProjectDetail());
-
-				}).collect(Collectors.toList());
-
-		return list;
-
-	}
-	*/
 	
 	
 	
@@ -201,17 +202,6 @@ public class ProjectService implements ProjectServiceImpl {
 		return false;
 	}
 	
-	@Override
-	public List<ProjectDTO> getCountedListOfProjectDTO(UserDTO manager) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ProjectDTO> completeProjectByManager(UserDTO manager, String projectcode) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 
 	
