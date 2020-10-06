@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -54,7 +55,7 @@ public class TaskController {
 		List<TaskDTO> tasks = taskService.getListOfTaskDTO();
 
 
-		task.setStatus(Status.OPEN);
+		task.setTaskStatus(Status.OPEN);
 		task.setStartDateTime(LocalDateTime.now());
 		tasks.add(task);
 
@@ -64,6 +65,50 @@ public class TaskController {
 		model.addAttribute("users", userService.listOfUserDTO());
 		model.addAttribute("projects", projectService.getListOfProjectDTO());
 		
+		return "task/assign";
+	}
+	
+	@GetMapping("/update/{id}")
+	public String editTask(@PathVariable("id") Long id, Model model) {
+
+		List<TaskDTO> tasks = taskService.getListOfTaskDTO();
+
+		TaskDTO task = taskService.getTaskDTOById(id);
+				
+		model.addAttribute("tasks", tasks);
+		
+		model.addAttribute("task", task);
+		model.addAttribute("users", userService.listOfUserDTO());
+		model.addAttribute("projects", projectService.getListOfProjectDTO());
+
+		return "task/update";
+	}
+	
+	@PostMapping("/update/{id}")
+	public String update(@PathVariable("id") Long id, @ModelAttribute("task") TaskDTO taskDTO,Model model) {
+
+		List<TaskDTO> tasks = taskService.updateTaskDTO(taskDTO);
+				
+	
+		model.addAttribute("tasks", tasks);
+		
+		model.addAttribute("task", taskDTO);
+		model.addAttribute("users", userService.listOfUserDTO());
+		model.addAttribute("projects", projectService.getListOfProjectDTO());
+
+		return "task/update";
+	}
+
+	@GetMapping("/delete/{id}")
+	public String deleteTask(@PathVariable("id") Long id,Model model) {
+
+		List<TaskDTO> tasks = taskService.deleteTask(id);
+				
+		model.addAttribute("tasks", tasks);
+		model.addAttribute("users", userService.listOfUserDTO());
+		model.addAttribute("task", new TaskDTO());
+		model.addAttribute("projects", projectService.getListOfProjectDTO());
+
 		return "task/assign";
 	}
 	

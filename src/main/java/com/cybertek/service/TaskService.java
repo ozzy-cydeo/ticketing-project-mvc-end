@@ -59,9 +59,9 @@ public class TaskService implements TaskServiceImpl {
 				.filter(x -> x.getId() != taskDTO.getId()).collect(Collectors.toList());
 
 		TaskDTO task = getTaskDTOById(taskDTO.getId());
-		task.setContent(taskDTO.getContent());
-		task.setTitle(taskDTO.getTitle());
-		task.setUser(taskDTO.getUser());
+		task.setTaskDetail(taskDTO.getTaskDetail());
+		task.setTaskSubject(taskDTO.getTaskSubject());
+		task.setAssignedEmployee(taskDTO.getAssignedEmployee());
 
 		tasks.add(task);
 
@@ -75,7 +75,7 @@ public class TaskService implements TaskServiceImpl {
 
 	@Override
 	public List<TaskDTO> getEmployeeTasks(UserDTO user) {
-		return getListOfTaskDTO().stream().filter(x -> x.getUser().equals(user) && x.getStatus() != Status.COMPLETED)
+		return getListOfTaskDTO().stream().filter(x -> x.getAssignedEmployee().equals(user) && x.getTaskStatus() != Status.COMPLETED)
 				.collect(Collectors.toList());
 	}
 
@@ -83,12 +83,12 @@ public class TaskService implements TaskServiceImpl {
 	public List<TaskDTO> updateTaskDTOForEmployee(UserDTO user, TaskDTO taskDTO) {
 		// TODO Auto-generated method stub
 		List<TaskDTO> tasks = getListOfTaskDTO().stream().filter(x -> x.getId() != taskDTO.getId()
-				&& x.getUser().equals(DataGenerator.activeUser) && x.getStatus() != Status.COMPLETED)
+				&& x.getAssignedEmployee().equals(DataGenerator.activeUser) && x.getTaskStatus() != Status.COMPLETED)
 				.collect(Collectors.toList());
 
 		TaskDTO task = getTaskDTOById(taskDTO.getId());
 
-		task.setStatus(taskDTO.getStatus());
+		task.setTaskStatus(taskDTO.getTaskStatus());
 
 		tasks.add(task);
 
@@ -98,7 +98,7 @@ public class TaskService implements TaskServiceImpl {
 	@Override
 	public List<TaskDTO> archiveList(UserDTO user) {
 		return getListOfTaskDTO().stream()
-				.filter(x -> x.getUser().equals(DataGenerator.activeUser) && x.getStatus() == Status.COMPLETED)
+				.filter(x -> x.getAssignedEmployee().equals(DataGenerator.activeUser) && x.getTaskStatus() == Status.COMPLETED)
 				.collect(Collectors.toList());
 	}
 

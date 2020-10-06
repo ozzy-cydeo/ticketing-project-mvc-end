@@ -39,7 +39,9 @@
 														<label for="code">Project</label>
 														<select name="assignedProject" class="custom-select" required >
 															<option th:value="''" th:text="Select"></option>
-															<option th:each="p : ${projects}" th:value="${p.projectCode}" th:text="${p.projectCode +'-'+ p.projectName}"></option>
+															<option th:each="p : ${projects}" th:value="${p.projectCode}" th:text="${p.projectCode +'-'+ p.projectName}" 
+																th:selected="${p.projectCode} == ${task.assignedProject.projectCode}">
+															</option>
 														</select>
 													</div>
 												</div>
@@ -50,7 +52,9 @@
 														<label for="code">Assigned Employee</label>
 														<select name="assignedEmployee"  class="custom-select" required >
 															<option th:value="''" th:text="Select"></option>
-															<option th:each="m : ${users}" th:value="${m.userName}" th:text="${m.firstName +' '+ m.lastName}"></option>
+															<option th:each="m : ${users}" th:value="${m.userName}" th:text="${m.firstName +' '+ m.lastName}" 
+																th:selected="${m.userName} == ${task.assignedEmployee.userName}">
+															</option>
 														</select>
 														<div class="invalid-feedback">Please choose employee</div>
 													</div>
@@ -62,7 +66,8 @@
 														<div class="col-sm-12 col-md-12 col-xs-12">
 															<div class="form-group">
 																<label for="detail">Task Subject</label>
-																<input type="text" th:field="*{taskSubject}" class="form-control" aria-describedby="inputGroupPrepend" required /> </div>
+																<input type="text" th:field="*{taskSubject}" class="form-control" aria-describedby="inputGroupPrepend" required /> 
+															</div>
 														</div>
 													</div>
 												</div>
@@ -73,7 +78,9 @@
 														<div class="col-sm-12 col-md-12 col-xs-12">
 															<div class="form-group">
 																<label for="detail">Detail</label>
-																<textarea class="form-control" rows="3"  th:field="*{taskDetail}" aria-describedby="inputGroupPrepend" required></textarea>
+																<textarea class="form-control" rows="3"  
+																	th:field="*{taskDetail}" aria-describedby="inputGroupPrepend" required>
+																</textarea>
 															</div>
 														</div>
 													</div>
