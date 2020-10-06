@@ -58,9 +58,10 @@
 												<div class="form-group">
 													<label for="MANAGER">Assigned Manager</label>
 													<select  name="manager" class="custom-select" >
-														<option th:value="${project.assignedManager.userName}" th:text="Select"></option>
+														<option th:value="${project.manager.userName}" th:text="Select"></option>
 														<option th:each="m : ${managers}" th:value="${m.userName}" th:text="${m.firstName +' '+ m.lastName}" 
-														th:selected="${m.userName} == ${project.assignedManager.userName}"></option>
+														th:selected="${m.userName} == ${project.manager.userName}"></option>
+													
 													</select>
 													<div class="invalid-feedback">Please choose manager</div>
 												</div>
@@ -146,7 +147,7 @@
 												<td th:text="${project.projectCode}"></td>
 												<td th:text="${project.projectName}"></td>
 												<td th:text="${#temporals.format(project.startDate, 'MM.dd.yyyy') + ' to '+ #temporals.format(project.endDate, 'MM.dd.yyyy') }"></td>
-												<td th:text="${project.assignedManager.firstName +' '+ project.assignedManager.lastName}"></td>
+												<td th:text="${project.manager.firstName +' '+ project.manager.lastName}"></td>
 												<td th:text="${project.projectStatus.value}"></td>
 												<td>
 													<a class="btn btn-warning rounded-0" th:href="@{/project/update/{id}(id=${project.projectCode})}">Update</a>

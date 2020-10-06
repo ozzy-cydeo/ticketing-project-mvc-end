@@ -49,11 +49,12 @@ public class TaskController {
 	}
 	
 	@PostMapping("/assign")
-	public String insertTask(@ModelAttribute("task") TaskDTO task,BindingResult result,Model model) {
+	public String insertTask(@ModelAttribute("task") TaskDTO task,Model model) {
 
 		List<TaskDTO> tasks = taskService.getListOfTaskDTO();
 
-		task.setTaskStatus(Status.OPEN);
+
+		task.setStatus(Status.OPEN);
 		task.setStartDateTime(LocalDateTime.now());
 		tasks.add(task);
 

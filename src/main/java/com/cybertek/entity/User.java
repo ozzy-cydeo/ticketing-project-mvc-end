@@ -2,18 +2,13 @@ package com.cybertek.entity;
 
 import java.time.LocalDateTime;
 
-import com.cybertek.util.Gender;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.cybertek.util.Gender;
+import lombok.*;
 
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper = true)
 public class User extends BaseEntity {
 	
 	private String firstName;
@@ -38,6 +33,5 @@ public class User extends BaseEntity {
 		this.role = role;
 		this.gender = gender;
 	}
-
 
 }

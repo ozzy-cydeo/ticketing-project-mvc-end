@@ -60,7 +60,7 @@
                             				<div class="col-sm-12 col-md-12 col-xs-12">
                               					<div class="form-group">
                                						<label for="role">Assigned Manager</label>
-                                  					<select name="roleid" th:field="*{assignedManager}" id="roleid" class="custom-select" required="required">
+                                  					<select name="roleid" th:field="*{manager}" id="roleid" class="custom-select" required="required">
                                     					<option th:value="''" th:text="Select"></option>
                                     					<option th:each="m : ${managers}" th:value="${m.userName}" th:text="${m.firstName +' '+ m.lastName}"></option>
 													</select>
@@ -147,7 +147,7 @@
 												<td th:text="${project.projectCode}"></td>
 												<td th:text="${project.projectName}"></td>
 												<td th:text="${#temporals.format(project.startDate, 'MM.dd.yyyy') + ' - '+ #temporals.format(project.endDate, 'MM.dd.yyyy') }"></td>
-												<td th:text="${project.assignedManager.firstName +' '+ project.assignedManager.lastName}"></td>
+												<td th:text="${project.manager.firstName +' '+ project.manager.lastName}"></td>
 												<td th:text="${project.projectStatus.value}"></td>
 												<td>
 													<a class="btn btn-warning rounded-0" 

@@ -32,9 +32,7 @@
                     				<div class="panel-body">
                     		
 									<!-- ------------------------FORM START----------------------------- -->
-									<form id="needs-validation" novalidate 
-									th:action="@{/task/assign}" 
-									th:object="${task}" method="post">
+									<form id="needs-validation" novalidate th:action="@{/task/assign}" th:object="${task}" method="post">
 											<div class="row">
 												<div class="col-sm-6 col-md-6 col-xs-12">
 													<div class="form-group">
@@ -64,7 +62,7 @@
 														<div class="col-sm-12 col-md-12 col-xs-12">
 															<div class="form-group">
 																<label for="detail">Task Subject</label>
-																<input type="text" th:field="*{taskSubject}" class="form-control" aria-describedby="inputGroupPrepend" required /> </div>
+																<input type="text" th:field="*{title}" class="form-control" aria-describedby="inputGroupPrepend" required /> </div>
 														</div>
 													</div>
 												</div>
@@ -75,7 +73,7 @@
 														<div class="col-sm-12 col-md-12 col-xs-12">
 															<div class="form-group">
 																<label for="detail">Detail</label>
-																<textarea class="form-control" rows="3"  th:field="*{taskDetail}" aria-describedby="inputGroupPrepend" required></textarea>
+																<textarea class="form-control" rows="3"  th:field="*{content}" aria-describedby="inputGroupPrepend" required></textarea>
 															</div>
 														</div>
 													</div>
@@ -88,7 +86,7 @@
 													</div>
 												</div>
 											</div>
-										</form>
+									</form>	
 									<!-- ------------------------FORM END----------------------------- -->
 									
                     				</div>
@@ -114,7 +112,7 @@
                     			</header>
                     			<div class="panel-body">
                      			 <div class="table-responsive">
-                        			<table class="table table-striped">
+									<table class="table">
 										<thead>
 											<tr>
 												<th scope="col">Project </th>
@@ -127,18 +125,15 @@
 										</thead>
 										<tbody>
 											<tr th:each="task : ${tasks}">
-												<td th:text="${task.taskSubject}" />
-												<td th:text="${task.assignedProject.projectCode +'-'+task.assignedProject.projectName}" />
-												<td th:text="${task.assignedEmployee.firstName +' '+ task.assignedEmployee.lastName}" />
+												<td th:text="${task.project.projectCode +'-'+task.project.projectName}" />
+												<td th:text="${task.title}" />
+												<td th:text="${task.user.firstName +' '+ task.user.lastName}" />
 												<td th:text="${#temporals.format(task.startDateTime, 'MM/dd/yyyy HH:mm')}" />
-												<td th:text="${task.taskStatus.value}" />
-												<td>
-													<a class="btn btn-warning rounded-0" th:href="@{/task/update/{id}(id=${task.id})}">Update</a> 
-													<a class="btn btn-danger rounded-0" th:href="@{/task/delete/{id}(id=${task.id})}">Delete</a> 
-												</td>
+												<td th:text="${task.status.value}" />
+												<td><a class="btn btn-warning rounded-0" th:href="@{/task/edit/{id}(id=${task.id})}">Update</a> <a class="btn btn-danger rounded-0" th:href="@{/task/delete/{id}(id=${task.id})}">Delete</a> </td>
 											</tr>
 										</tbody>
-                        			</table>
+									</table>
                       			</div>
                     		  </div>
                   			  </section>

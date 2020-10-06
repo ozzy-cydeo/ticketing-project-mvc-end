@@ -60,10 +60,11 @@ public class ProjectController {
 	public String editProject(@PathVariable("projectCode") String projectCode, Model model) {
 
 		List<ProjectDTO> projects = projectService.getListOfProjectDTO();
+		
 		ProjectDTO project = projectService.getProjectDTOByProjectCode(projectCode);
 		
 	
-
+		
 		model.addAttribute("project", project);
 		model.addAttribute("managers", userService.getManagers());
 		model.addAttribute("projects", projects);

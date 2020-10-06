@@ -18,9 +18,16 @@ import com.cybertek.util.Status;
 @Service
 public class ProjectService implements ProjectServiceImpl {
 	
-	@Autowired
+	
 	UserServiceImpl userService;
 	
+	
+	@Autowired
+	public ProjectService(UserServiceImpl userService) {
+		super();
+		this.userService = userService;
+	}
+
 	@Override
 	public List<Project> getListOfProject() {
 		return DataGenerator.getProjects();
@@ -36,7 +43,7 @@ public class ProjectService implements ProjectServiceImpl {
 	@Override
 	public List<Project> getListOfProject(User manager) {
 		// TODO Auto-generated method stub
-		return DataGenerator.getProjects().stream().filter(x -> x.getAssignedManager() == manager).collect(Collectors.toList());
+		return DataGenerator.getProjects().stream().filter(x -> x.getManager() == manager).collect(Collectors.toList());
 	}
 
 
@@ -49,7 +56,7 @@ public class ProjectService implements ProjectServiceImpl {
 		obj.setProjectDetail(project.getProjectDetail());
 		obj.setStartDate(project.getStartDate());
 		obj.setEndDate(project.getEndDate());
-		obj.setAssignedManager(project.getAssignedManager());
+		obj.setManager(project.getManager());
 		obj.setProjectName(project.getProjectName());
 
 		obj.setProjectStatus(project.getProjectStatus() != null ? project.getProjectStatus() : obj.getProjectStatus());
@@ -69,7 +76,7 @@ public class ProjectService implements ProjectServiceImpl {
 		List<ProjectDTO> list = getListOfProject().stream().map(x -> {
 
 			return new ProjectDTO(x.getProjectCode(), x.getProjectName(),
-					userService.getUserDTOByUsername(x.getAssignedManager().getUserName()), x.getStartDate(), x.getEndDate(),
+					userService.getUserDTOByUsername(x.getManager().getUserName()), x.getStartDate(), x.getEndDate(),
 					x.getProjectStatus(), x.getProjectDetail());
 
 		}).collect(Collectors.toList());
@@ -80,14 +87,20 @@ public class ProjectService implements ProjectServiceImpl {
 	@Override
 	public ProjectDTO getProjectDTOByProjectCode(String projectcode) {
 
-		return getListOfProject().stream().filter(x -> x.getProjectCode().equals(projectcode)).map(x -> {
+		ProjectDTO p =  getListOfProject().stream().filter(x -> x.getProjectCode().equals(projectcode)).map(x -> {
 
 			return new ProjectDTO(x.getProjectCode(), x.getProjectName(),
-					userService.getUserDTOByUsername(x.getAssignedManager().getUserName()), x.getStartDate(), x.getEndDate(),
+					userService.getUserDTOByUsername(x.getManager().getUserName()), x.getStartDate(), x.getEndDate(),
 					x.getProjectStatus(), x.getProjectDetail());
 
 		}).findFirst().get();
+		
+		return p;
+		
+		
 	}
+	
+
 
 
 	@Override

@@ -68,7 +68,7 @@ public class DataGenerator {
 
 		RoleDTO role = roleService.getRoleDTOById(user.getRole().getId());
 
-		return new UserDTO(user.getFirstName(), user.getLastName(), user.getFirstName(), user.getPassWord(),
+		return new UserDTO(user.getFirstName(), user.getLastName(), user.getUserName(), user.getPassWord(),
 				user.isEnabled(), user.getPhone(), role, user.getGender());
 
 	}
@@ -130,7 +130,7 @@ public class DataGenerator {
 
 		List<ProjectDTO> list = projects.stream().map(x -> {
 
-			return new ProjectDTO(x.getProjectCode(), x.getProjectName(), getUserDTOByUser(x.getAssignedManager()), x.getStartDate(),
+			return new ProjectDTO(x.getProjectCode(), x.getProjectName(), getUserDTOByUser(x.getManager()), x.getStartDate(),
 					x.getEndDate(), x.getProjectStatus(), x.getProjectDetail());
 
 		}).collect(Collectors.toList());
@@ -140,7 +140,7 @@ public class DataGenerator {
 
 	public static ProjectDTO getProjectDTOByProject(Project project) {
 
-		return new ProjectDTO(project.getProjectCode(), project.getProjectName(), getUserDTOByUser(project.getAssignedManager()),
+		return new ProjectDTO(project.getProjectCode(), project.getProjectName(), getUserDTOByUser(project.getManager()),
 				project.getStartDate(), project.getEndDate(), project.getProjectStatus(), project.getProjectDetail());
 	}
 
